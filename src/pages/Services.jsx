@@ -52,7 +52,7 @@ const Services = () => {
         {/* Background Image Container */}
         <div className="absolute inset-0 w-full">
           <img 
-              src="https://images.unsplash.com/photo-1635837594301-aee27378931f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="/images/ship-home.jpg"
             alt="HVAC Services Background"
             className="w-full h-full object-cover"
           />

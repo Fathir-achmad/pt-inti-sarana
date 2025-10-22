@@ -39,7 +39,7 @@ const Home = () => {
 >
   <div className="absolute inset-0">
     <img 
-       src="https://images.unsplash.com/photo-1635837594301-aee27378931f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+       src="/images/ship-home.jpg"
       alt="Modern Architecture"
       className="w-full h-full object-cover"
     />
@@ -54,9 +54,6 @@ const Home = () => {
     className="relative z-10 max-w-4xl mx-auto text-center"
   >
     <motion.div variants={fadeInUpVariants} className="mb-6">
-      {/* <span className="inline-block px-6 py-2 rounded-full bg-blue-500/20 text-blue-100 text-sm font-medium mb-4 backdrop-blur-sm">
-        Solusi MEP Terpercaya
-      </span> */}
     </motion.div>
 
     <motion.h1 
@@ -151,7 +148,7 @@ const Home = () => {
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/5 to-blue-500/5 rounded-2xl blur-2xl" />
               <div className="relative h-full rounded-2xl overflow-hidden shadow-sm">
                 <img 
-                  src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2069&auto=format&fit=crop"
+                  src="/images/product-home.jpg"
                   alt="Modern Office"
                   className="w-full h-full object-cover"
                 />
@@ -340,9 +337,9 @@ const Home = () => {
       <section className="relative py-24 overflow-hidden">
 
          <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-primary mix-blend-multiply opacity-90" />
+          <div className="absolute inset-0 bg-primary mix-blend-multiply opacity-10" />
           <img 
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+            src="/images/footer-home.jpg"
             alt="Building"
             className="w-full h-full object-cover"
           />
