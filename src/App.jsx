@@ -8,6 +8,7 @@ import Projects from './pages/Projects'
 import Contact from './pages/Contact'
 import Cursor from './components/Cursor'
 import NotFound from './pages/NotFound'
+import WhatsAppButton from './components/Whatsapp'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
+        <WhatsAppButton />
       </div>
     </Router>
   )

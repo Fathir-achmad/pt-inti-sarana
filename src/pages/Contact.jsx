@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Phone, Mail, Clock, MapPin } from 'lucide-react'
+import emailjs from 'emailjs-com'
+
 
 const Contact = () => {
   const [formState, setFormState] = useState({
@@ -14,20 +16,35 @@ const Contact = () => {
   const [submitStatus, setSubmitStatus] = useState(null)
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsSubmitting(false)
-    setSubmitStatus('success')
-    setFormState({
-      name: '',
-      email: '',
-      phone: '',
-      message: '',
-    })
+  e.preventDefault()
+  setIsSubmitting(true)
+  setSubmitStatus(null)
+
+    try {
+      const result = await emailjs.send(
+        // HARUS DI SESUAIKAN DENGAN EMAIL PERUSAHAAN UNTUK KEY EMAILNYA ///////////////////////////////////////////////////////////////////////
+        'service_hr1k7lf', // ganti sesuai dari EmailJS
+        'template_p2acgf5', // ganti sesuai dari EmailJS
+        {
+        name: formState.name,
+        email: formState.email,
+        phone: formState.phone,
+        message: formState.message,
+        title: 'Pesan dari Website', // ini akan muncul di subject
+        time: new Date().toLocaleString(), // kirim waktu otomatis
+      },
+        'f0MXEUIKoKYtdpR53' // ganti sesuai dari EmailJS
+      )
+
+      console.log(result.text)
+      setSubmitStatus('success')
+      setFormState({ name: '', email: '', phone: '', message: '' })
+    } catch (error) {
+      console.error('FAILED...', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -157,7 +174,7 @@ const Contact = () => {
                     type="text"
                     value={formState.name}
                     onChange={e => setFormState({...formState, name: e.target.value})}
-                    className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-black"
                     required
                   />
                 </div>
@@ -170,7 +187,7 @@ const Contact = () => {
                     type="email"
                     value={formState.email}
                     onChange={e => setFormState({...formState, email: e.target.value})}
-                    className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-black"
                     required
                   />
                 </div>
@@ -183,7 +200,7 @@ const Contact = () => {
                     type="tel"
                     value={formState.phone}
                     onChange={e => setFormState({...formState, phone: e.target.value})}
-                    className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-black"
                   />
                 </div>
 
@@ -194,7 +211,7 @@ const Contact = () => {
                   <textarea
                     value={formState.message}
                     onChange={e => setFormState({...formState, message: e.target.value})}
-                    className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors h-32"
+                      className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-black"
                     required
                   ></textarea>
                 </div>
@@ -215,6 +232,15 @@ const Contact = () => {
                     className="text-green-600 text-center bg-green-50 p-4 rounded-lg"
                   >
                     Pesan berhasil terkirim!
+                  </motion.div>
+                )}
+                {submitStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-600 text-center bg-red-50 p-4 rounded-lg"
+                  >
+                    Gagal mengirim pesan. Silakan coba lagi nanti.
                   </motion.div>
                 )}
               </form>
